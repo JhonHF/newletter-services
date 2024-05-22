@@ -13,6 +13,17 @@ export class SubscriptionService {
     });
   }
 
+  createMany(
+    data: {
+      newsletterId: Subscription['newsletterId'];
+      subscriberId: Subscription['subscriberId'];
+    }[],
+  ) {
+    return this.prisma.subscription.createMany({
+      data,
+    });
+  }
+
   find(filters: Partial<Subscription>) {
     return this.prisma.subscription.findMany({
       where: filters,

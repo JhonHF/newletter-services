@@ -8,5 +8,6 @@ import { NewsletterController } from './newsletter.controller';
   controllers: [NewsletterController],
   providers: [NewsletterService],
   imports: [PrismaModule],
+  exports: [NewsletterService],
 })
 export class NewsletterModule {}

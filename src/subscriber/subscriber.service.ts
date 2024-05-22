@@ -13,6 +13,12 @@ export class SubscriberService {
     });
   }
 
+  createMany(data: Array<Pick<Subscriber, 'email' | 'name'>>) {
+    return this.prisma.subscriber.createMany({
+      data,
+    });
+  }
+
   findAll({ newsletterId }: Pick<Subscription, 'newsletterId'>) {
     return this.prisma.subscriber.findMany({
       where: {
@@ -22,6 +28,15 @@ export class SubscriberService {
           },
         },
       },
+    });
+  }
+
+  findBulkIdByEmail(users: Array<Pick<Subscriber, 'name' | 'email'>>) {
+    return this.prisma.subscriber.findMany({
+      where: {
+        email: { in: users.map((subscriber) => subscriber.email) },
+      },
+      select: { id: true },
     });
   }
 
